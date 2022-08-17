@@ -173,4 +173,25 @@ describe('backend-express-template routes', () => {
       Books: expect.any(Array),
     });
   });
+  it('#POST /api/v1/authors should add an author', async () => {
+    const newAuthor = {
+      firstName: 'Kurt',
+      lastName: 'Vonnegut',
+      dob: new Date('1922-11-11'),
+      pob: 'Indianapolis, IN',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const res = await request(app).post('/api/v1/authors').send(newAuthor);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      firstName: 'Kurt',
+      lastName: 'Vonnegut',
+      dob: expect.any(String),
+      pob: 'Indianapolis, IN',
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+    });
+  });
 });
