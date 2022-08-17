@@ -194,4 +194,24 @@ describe('backend-express-template routes', () => {
       updatedAt: expect.any(String),
     });
   });
+  it('#POST /api/v1/authors/:id/books should add a new book that corresponds to author id from params', async () => {
+    const newBook = {
+      title: 'Dawn',
+      releaseYear: 1987,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const res = await request(app)
+      .post('/api/v1/authors/4/books')
+      .send(newBook);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      authorId: 4,
+      title: 'Dawn',
+      releaseYear: 1987,
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+    });
+  });
 });
