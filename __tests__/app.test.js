@@ -133,4 +133,17 @@ describe('backend-express-template routes', () => {
       updatedAt: expect.any(String),
     });
   });
+  it('#GET /api/v1/books/:id should get a book with id matching params and author info', async () => {
+    const res = await request(app).get('/api/v1/books/1');
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: 1,
+      authorId: 1,
+      title: 'American Gods',
+      releaseYear: 2001,
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+      Author: expect.any(Object),
+    });
+  });
 });
