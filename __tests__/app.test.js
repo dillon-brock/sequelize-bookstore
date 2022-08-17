@@ -146,4 +146,17 @@ describe('backend-express-template routes', () => {
       Author: expect.any(Object),
     });
   });
+  it('#GET /api/v1/authors should get a list of authors', async () => {
+    const res = await request(app).get('/api/v1/authors');
+    expect(res.status).toBe(200);
+    expect(res.body[0]).toEqual({
+      id: expect.any(Number),
+      firstName: expect.any(String),
+      lastName: expect.any(String),
+      dob: expect.any(String),
+      pob: expect.any(String),
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+    });
+  });
 });
