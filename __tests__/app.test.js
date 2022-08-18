@@ -4,9 +4,13 @@ const db = require('../lib/models');
 
 describe('backend-express-template routes', () => {
   beforeEach(async () => {
-    await db.sequelize.sync({ force: true });
+    // await db.sequelize.sync({ force: true });
     try {
-      await db.Author.bulkCreate([
+      const queryInterface = db.sequelize.getQueryInterface();
+      await queryInterface.bulkDelete('BookAuthors', null, {});
+      await queryInterface.bulkDelete('Books', null, {});
+      await queryInterface.bulkDelete('Authors', null, {});
+      const authors = await db.Author.bulkCreate([
         {
           firstName: 'Neil',
           lastName: 'Gaiman',
@@ -48,69 +52,98 @@ describe('backend-express-template routes', () => {
           updatedAt: new Date(),
         },
       ]);
-      await db.Book.bulkCreate([
+      const books = await db.Book.bulkCreate([
         {
           title: 'American Gods',
           releaseYear: 2001,
-          authorId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'The Graveyard Book',
           releaseYear: 2008,
-          authorId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Crying in H Mart',
           releaseYear: 2021,
-          authorId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Educated',
           releaseYear: 2018,
-          authorId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Kindred',
           releaseYear: 1979,
-          authorId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Parable of the Sower',
           releaseYear: 1993,
-          authorId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Xenogenesis',
           releaseYear: 1987,
-          authorId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'It Chooses You',
           releaseYear: 2011,
-          authorId: 5,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'The First Bad Man',
           releaseYear: 2015,
-          authorId: 5,
           createdAt: new Date(),
           updatedAt: new Date(),
+        },
+      ]);
+      await db.BookAuthor.bulkCreate([
+        {
+          BookId: books[0].id,
+          AuthorId: authors[0].id,
+        },
+        {
+          BookId: books[1].id,
+          AuthorId: authors[0].id,
+        },
+        {
+          BookId: books[2].id,
+          AuthorId: authors[1].id,
+        },
+        {
+          BookId: books[3].id,
+          AuthorId: authors[2].id,
+        },
+        {
+          BookId: books[4].id,
+          AuthorId: authors[3].id,
+        },
+        {
+          BookId: books[5].id,
+          AuthorId: authors[3].id,
+        },
+        {
+          BookId: books[6].id,
+          AuthorId: authors[3].id,
+        },
+        {
+          BookId: books[7].id,
+          AuthorId: authors[4].id,
+        },
+        {
+          BookId: books[8].id,
+          AuthorId: authors[4].id,
         },
       ]);
     } catch (e) {
@@ -118,6 +151,9 @@ describe('backend-express-template routes', () => {
       console.log(e);
     }
   });
+  // afterEach(async () => {
+
+  // });
   afterAll(async () => {
     await db.sequelize.close();
   });
@@ -128,7 +164,6 @@ describe('backend-express-template routes', () => {
       id: expect.any(Number),
       title: expect.any(String),
       releaseYear: expect.any(Number),
-      authorId: expect.any(Number),
       createdAt: expect.any(String),
       updatedAt: expect.any(String),
     });
@@ -138,7 +173,6 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: 1,
-      authorId: 1,
       title: 'American Gods',
       releaseYear: 2001,
       createdAt: expect.any(String),
@@ -207,7 +241,6 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: expect.any(Number),
-      authorId: 4,
       title: 'Dawn',
       releaseYear: 1987,
       createdAt: expect.any(String),
