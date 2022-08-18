@@ -16,134 +16,152 @@ describe('backend-express-template routes', () => {
           lastName: 'Gaiman',
           dob: new Date('1960-11-10'),
           pob: 'Portchester, UK',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           firstName: 'Michelle',
           lastName: 'Zauner',
           dob: new Date('1989-03-29'),
           pob: 'Seoul, South Korea',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           firstName: 'Tara',
           lastName: 'Westover',
           dob: new Date('1989-09-27'),
           pob: 'Clifton Idaho',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           firstName: 'Octavia E.',
           lastName: 'Butler',
           dob: new Date('1947-06-22'),
           pob: 'Pasadena, CA',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           firstName: 'Miranda',
           lastName: 'July',
           dob: new Date('1974-02-15'),
           pob: 'Barre, VT',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
       ]);
       const books = await db.Book.bulkCreate([
         {
           title: 'American Gods',
           releaseYear: 2001,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'The Graveyard Book',
           releaseYear: 2008,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'Crying in H Mart',
           releaseYear: 2021,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'Educated',
           releaseYear: 2018,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'Kindred',
           releaseYear: 1979,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'Parable of the Sower',
           releaseYear: 1993,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'Xenogenesis',
           releaseYear: 1987,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'It Chooses You',
           releaseYear: 2011,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           title: 'The First Bad Man',
           releaseYear: 2015,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
       ]);
       await db.BookAuthor.bulkCreate([
         {
           BookId: books[0].id,
           AuthorId: authors[0].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[1].id,
           AuthorId: authors[0].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[2].id,
           AuthorId: authors[1].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[3].id,
           AuthorId: authors[2].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[4].id,
           AuthorId: authors[3].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[5].id,
           AuthorId: authors[3].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[6].id,
           AuthorId: authors[3].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[7].id,
           AuthorId: authors[4].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
         {
           BookId: books[8].id,
           AuthorId: authors[4].id,
+          // createdAt: new Date(),
+          // updatedAt: new Date(),
         },
       ]);
     } catch (e) {
@@ -164,8 +182,8 @@ describe('backend-express-template routes', () => {
       id: expect.any(Number),
       title: expect.any(String),
       releaseYear: expect.any(Number),
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
     });
   });
   it('#GET /api/v1/books/:id should get a book with id matching params and author info', async () => {
@@ -175,9 +193,9 @@ describe('backend-express-template routes', () => {
       id: 1,
       title: 'American Gods',
       releaseYear: 2001,
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
-      Author: expect.any(Object),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
+      Authors: expect.any(Array),
     });
   });
   it('#GET /api/v1/authors should get a list of authors', async () => {
@@ -189,12 +207,13 @@ describe('backend-express-template routes', () => {
       lastName: expect.any(String),
       dob: expect.any(String),
       pob: expect.any(String),
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
     });
   });
   it('#GET /api/v1/authors/:id should get an author with id matching params and corresponding books', async () => {
     const res = await request(app).get('/api/v1/authors/1');
+    console.log(res.body);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: 1,
@@ -202,8 +221,8 @@ describe('backend-express-template routes', () => {
       lastName: 'Gaiman',
       dob: expect.any(String),
       pob: 'Portchester, UK',
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
       Books: expect.any(Array),
     });
   });
@@ -213,8 +232,8 @@ describe('backend-express-template routes', () => {
       lastName: 'Vonnegut',
       dob: new Date('1922-11-11'),
       pob: 'Indianapolis, IN',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      // createdAt: new Date(),
+      // updatedAt: new Date(),
     };
     const res = await request(app).post('/api/v1/authors').send(newAuthor);
     expect(res.status).toBe(200);
@@ -224,16 +243,16 @@ describe('backend-express-template routes', () => {
       lastName: 'Vonnegut',
       dob: expect.any(String),
       pob: 'Indianapolis, IN',
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
     });
   });
   it('#POST /api/v1/authors/:id/books should add a new book that corresponds to author id from params', async () => {
     const newBook = {
       title: 'Dawn',
       releaseYear: 1987,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      // createdAt: new Date(),
+      // updatedAt: new Date(),
     };
     const res = await request(app)
       .post('/api/v1/authors/4/books')
@@ -243,8 +262,8 @@ describe('backend-express-template routes', () => {
       id: expect.any(Number),
       title: 'Dawn',
       releaseYear: 1987,
-      createdAt: expect.any(String),
-      updatedAt: expect.any(String),
+      // createdAt: expect.any(String),
+      // updatedAt: expect.any(String),
     });
   });
 });
