@@ -455,4 +455,27 @@ describe('backend-express-template routes', () => {
       GenreId: expect.any(Number),
     });
   });
+  it('#POST api/v1/books/:id/authors should add a new author associated with a book', async () => {
+    const newAuthor = {
+      firstName: 'Extra',
+      lastName: 'Author',
+      dob: new Date('1970-01-01'),
+      pob: 'New York City, NY',
+    };
+    const books = await db.Book.findAll();
+    const bookId = books[4].id;
+
+    const res = await request(app)
+      .post(`/api/v1/books/${bookId}/authors`)
+      .send(newAuthor);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      firstName: 'Extra',
+      lastName: 'Author',
+      dob: expect.any(String),
+      pob: 'New York City, NY',
+    });
+  });
 });
