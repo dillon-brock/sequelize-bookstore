@@ -371,7 +371,7 @@ describe('backend-express-template routes', () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: initialBookId,
-      GenreId: expect.any(Number),
+      Genre: expect.any(Object),
       title: 'American Gods',
       releaseYear: 2001,
       Authors: expect.any(Array),
