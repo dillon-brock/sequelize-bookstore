@@ -421,13 +421,15 @@ describe('backend-express-template routes', () => {
   });
   it('#POST /api/v1/authors/:id/books should add a new book that corresponds to author id from params', async () => {
     const genres = await db.Genre.findAll();
+    const authors = await db.Author.findAll();
+    const authorId = authors[3].id;
     const newBook = {
       title: 'Dawn',
       releaseYear: 1987,
       GenreId: genres[7].id,
     };
     const res = await request(app)
-      .post('/api/v1/authors/4/books')
+      .post(`/api/v1/authors/${authorId}/books`)
       .send(newBook);
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
@@ -435,6 +437,22 @@ describe('backend-express-template routes', () => {
       GenreId: expect.any(Number),
       title: 'Dawn',
       releaseYear: 1987,
+    });
+  });
+  it('#POST /api/v1/books should add a new book not associated with authors', async () => {
+    const genres = await db.Genre.findAll();
+    const newBook = {
+      title: 'Humble Pi',
+      releaseYear: 2019,
+      GenreId: genres[2].id,
+    };
+    const res = await request(app).post('/api/v1/books').send(newBook);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      title: 'Humble Pi',
+      releaseYear: 2019,
+      GenreId: expect.any(Number),
     });
   });
 });
